@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "Pizza", "price": 10, "promotion_id": null },
+  { "id": 2, "name": "Hamburguer", "price": 6, "promotion_id": 1 },
+  { "id": 3, "name": "Diet Coke", "price": 1, "promotion_id": 3 },
+  { "id": 4, "name": "Coke", "price": 1, "promotion_id": 2 },
+  { "id": 5, "name": "Fanta", "price": 1, "promotion_id": null },
+  { "id": 6, "name": "Fries", "price": 5, "promotion_id": 2 },
+  { "id": 7, "name": "Sushi", "price": 20.5, "promotion_id": 3 }
+]
