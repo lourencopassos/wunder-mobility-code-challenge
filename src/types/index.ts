@@ -52,3 +52,9 @@ export interface IPromotionsBusiness {
     calculateAmountPromotion: AggregatedProducts
   ): AggregatedProducts;
 }
+
+export interface ICheckoutBusiness {
+  checkout(order: Product[]): number;
+  scan(products: Product[]): AggregatedProducts[];
+  getFinalPrice(productsWithDiscounts: AggregatedProducts[]): number;
+}
