@@ -26,7 +26,7 @@ export class CheckoutBusiness implements ICheckoutBusiness {
         aggregatedProducts.push(res[value.id]);
       }
       res[value.id].quantity += value.quantity;
-      res[value.id].subtotal += value.price;
+      res[value.id].subtotal = value.price * value.quantity;
       return res;
     }, {});
     return aggregatedProducts;

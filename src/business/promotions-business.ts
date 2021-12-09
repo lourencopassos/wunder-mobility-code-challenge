@@ -43,12 +43,11 @@ export class PromotionBusiness implements IPromotionsBusiness {
     let finalPrice;
 
     if (amountPromotion) {
-      products.quantity >= amountPromotion.min_value
+      products.subtotal >= amountPromotion.min_value
         ? (finalPrice = products.subtotal - amountPromotion.discount)
         : (finalPrice = products.subtotal);
     }
-
-    return { ...products, subtotal: finalPrice as number };
+    return { ...products, subtotal: finalPrice as number || products.subtotal };
   }
 
   calculatePercentagePromotion(
@@ -62,13 +61,11 @@ export class PromotionBusiness implements IPromotionsBusiness {
 
     if (percentagePromotion) {
       products.quantity >= percentagePromotion.min_value
-        ? (finalPrice =
-            products.subtotal -
-            products.subtotal * percentagePromotion.discount)
+        ? (finalPrice = this.calculatePercentage(products.subtotal, percentagePromotion.discount))
         : (finalPrice = products.subtotal);
     }
 
-    return { ...products, subtotal: finalPrice as number };
+    return { ...products, subtotal: finalPrice as number || products.subtotal };
   }
 
   getCurrentPromotions(): PromotionalRule[] {
@@ -76,4 +73,8 @@ export class PromotionBusiness implements IPromotionsBusiness {
       fs.readFileSync("./src/data/promotional_rules.json", "utf8")
     );
   }
+
+  calculatePercentage(value: number, percentage: number): number {
+    return value - (value * percentage);
+  } 
 }

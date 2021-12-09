@@ -1,4 +1,4 @@
 [
-  { "id": 1, "type": "PERCENTAGE", "min_value": 20, "discount": 5 },
-  { "id": 2, "type": "AMOUNT", "min_value": 4, "discount": 0.25 }
+  { "id": 1, "type": "PERCENTAGE_OF_TOTAL_PRICE", "min_value": 4, "discount": 0.5 },
+  { "id": 2, "type": "AMOUNT_OF_PRODUCTS", "min_value": 10, "discount": 0.25 }
 ]
