@@ -1,12 +1,13 @@
 import {
   AggregatedProducts,
+  IPromotionsBusiness,
   PromotionalRule,
   PromotionalRuleTypes,
   PromotionalRuleTypesIds,
 } from "../types";
 import fs from "fs";
 
-export class PromotionBusiness {
+export class PromotionBusiness implements IPromotionsBusiness {
   constructor() {}
 
   calculatePromotions(
@@ -32,12 +33,14 @@ export class PromotionBusiness {
     return orderWithDiscounts;
   }
 
-  private calculateAmountPromotion(products: AggregatedProducts): AggregatedProducts {
+  calculateAmountPromotion(
+    products: AggregatedProducts
+  ): AggregatedProducts {
     const amountPromotion = this.getCurrentPromotions().find(
       (promotion) => promotion.type === PromotionalRuleTypes.AMOUNT
     );
 
-    let finalPrice
+    let finalPrice;
 
     if (amountPromotion) {
       products.quantity >= amountPromotion.min_value
@@ -48,7 +51,9 @@ export class PromotionBusiness {
     return { ...products, subtotal: finalPrice as number };
   }
 
-  private calculatePercentagePromotion(products: AggregatedProducts): AggregatedProducts {
+  calculatePercentagePromotion(
+    products: AggregatedProducts
+  ): AggregatedProducts {
     const percentagePromotion = this.getCurrentPromotions().find(
       (promotion) => promotion.type === PromotionalRuleTypes.PERCENTAGE
     );
@@ -66,7 +71,7 @@ export class PromotionBusiness {
     return { ...products, subtotal: finalPrice as number };
   }
 
-  private getCurrentPromotions(): PromotionalRule[] {
+  getCurrentPromotions(): PromotionalRule[] {
     return JSON.parse(
       fs.readFileSync("./src/data/promotional_rules.json", "utf8")
     );

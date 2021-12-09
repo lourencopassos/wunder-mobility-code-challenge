@@ -1,19 +1,19 @@
-import { AggregatedProducts, IPromotionsBusiness, Product } from "../types";
+import { AggregatedProducts, ICheckoutBusiness, IPromotionsBusiness, Product } from "../types";
 
-export class CheckoutBusiness {
+export class CheckoutBusiness implements ICheckoutBusiness {
   private promotionsBusiness: IPromotionsBusiness;
   constructor(promotionsBusiness: IPromotionsBusiness) {
     this.promotionsBusiness = promotionsBusiness;
   }
 
-  checkout(order: Product[]) {
+  checkout(order: Product[]): number {
     const aggregatedProducts = this.scan(order);
     const productsWithDiscounts =
       this.promotionsBusiness.calculatePromotions(aggregatedProducts);
     return this.getFinalPrice(productsWithDiscounts);
   }
 
-  private scan(products: Product[]): AggregatedProducts[] {
+  scan(products: Product[]): AggregatedProducts[] {
     const aggregatedProducts: AggregatedProducts[] = [];
     products.reduce(function (res: any, value: any) {
       if (!res[value.id]) {
@@ -31,7 +31,8 @@ export class CheckoutBusiness {
     }, {});
     return aggregatedProducts;
   }
-  private getFinalPrice(productsWithDiscounts: AggregatedProducts[]): number {
+
+  getFinalPrice(productsWithDiscounts: AggregatedProducts[]): number {
     return productsWithDiscounts
       .map((product) => product.subtotal)
       .reduce((prev, next) => prev + next);
