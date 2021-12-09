@@ -20,8 +20,8 @@ export interface Order {
 }
 
 export enum PromotionalRuleTypes {
-  PERCENTAGE = "PERCENTAGE",
-  AMOUNT = "AMOUNT",
+  PERCENTAGE = "PERCENTAGE_OF_TOTAL_PRICE",
+  AMOUNT = "AMOUNT_OF_PRODUCTS",
 }
 
 export enum PromotionalRuleTypesIds {
@@ -51,6 +51,7 @@ export interface IPromotionsBusiness {
   calculatePercentagePromotion(
     calculateAmountPromotion: AggregatedProducts
   ): AggregatedProducts;
+  calculatePercentage(value: number, discount: number): number;
 }
 
 export interface ICheckoutBusiness {
