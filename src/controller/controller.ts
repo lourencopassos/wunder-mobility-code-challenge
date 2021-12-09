@@ -11,7 +11,7 @@ export class Controller {
     try {
       const order = req.body;
       const finalPrice = this.checkoutBusiness.checkout(order);
-      res.status(200).send({ message: `Final price is ${finalPrice}` });
+      res.status(200).send({ message: `Final price is € ${finalPrice}` });
     } catch (error) {
       res.status(400).send(`Error: ${error}`);
     }
