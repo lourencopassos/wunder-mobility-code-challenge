@@ -61,7 +61,7 @@ export class PromotionBusiness implements IPromotionsBusiness {
 
     if (percentagePromotion) {
       products.quantity >= percentagePromotion.min_value
-        ? (finalPrice = this.calculatePercentage(products.subtotal, percentagePromotion.discount))
+        ? (finalPrice = this.calculateValueWithPercentageDiscount(products.subtotal, percentagePromotion.discount))
         : (finalPrice = products.subtotal);
     }
 
@@ -74,7 +74,7 @@ export class PromotionBusiness implements IPromotionsBusiness {
     );
   }
 
-  calculatePercentage(value: number, percentage: number): number {
+  calculateValueWithPercentageDiscount(value: number, percentage: number): number {
     return value - (value * percentage);
   } 
 }
