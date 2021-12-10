@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   price: number;
   promotion_id: number;
+  quantity?: number;
 }
 
 export interface CheckoutProduct extends Product {
@@ -34,6 +35,7 @@ export interface AggregatedProducts {
   subtotal: number;
   quantity: number;
   promotion_id: number;
+  individual_price?: number;
 }
 
 export interface PromotionalRule {
@@ -51,7 +53,7 @@ export interface IPromotionsBusiness {
   calculatePercentagePromotion(
     calculateAmountPromotion: AggregatedProducts
   ): AggregatedProducts;
-  calculatePercentage(value: number, discount: number): number;
+  calculateValueWithPercentageDiscount(value: number, discount: number): number;
 }
 
 export interface ICheckoutBusiness {

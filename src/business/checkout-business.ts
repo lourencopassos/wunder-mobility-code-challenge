@@ -21,15 +21,18 @@ export class CheckoutBusiness implements ICheckoutBusiness {
           id: value.id,
           quantity: 0,
           promotion_id: value.promotion_id,
+          individual_price: value.price,
           subtotal: 0,
         };
         aggregatedProducts.push(res[value.id]);
       }
       res[value.id].quantity += value.quantity;
-      res[value.id].subtotal = value.price * value.quantity;
       return res;
     }, {});
-    return aggregatedProducts;
+    return aggregatedProducts.map((product) => ({
+      ...product,
+      subtotal: product.quantity * product.individual_price!,
+    }));
   }
 
   getFinalPrice(productsWithDiscounts: AggregatedProducts[]): number {
