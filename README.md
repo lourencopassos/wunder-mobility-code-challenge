@@ -10,7 +10,6 @@ Implement a checkout system that can scan items in any order and apply certain p
 - Typescript
 - Express
 - Jest
-- Supertest
 
 ## 📝 Functional Requirements
 - Endpoint that handle the checkout of products
