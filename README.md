@@ -50,12 +50,16 @@ To add new promotions, simply add new entities to the `promotional_rules.json`, 
 
 **`POST /v1/checkout`** This endpoint must return a list of GitHub users and the link for the next page. Use the _query param_ `since` to fetch users from the given number
 
-Example request:
+Example request (imitating how would a checkout work on real-life, each product by the time):
 
 ```
 [
-  { "id": 2, "name": "Hamburguer", "price": 6, "promotion_id": 1, "quantity": 20 },
-  { "id": 3, "name": "Sushi", "price": 6, "promotion_id": 1, "quantity": 10 }
+  { "id": 2, "name": "Hamburguer", "price": 6, "promotion_id": 1, "quantity": 1 },
+  { "id": 2, "name": "Hamburguer", "price": 6, "promotion_id": 1, "quantity": 1 },
+  { "id": 2, "name": "Hamburguer", "price": 6, "promotion_id": 1, "quantity": 1 },
+  { "id": 3, "name": "Sushi", "price": 6, "promotion_id": 1, "quantity": 1 },
+  { "id": 3, "name": "Sushi", "price": 6, "promotion_id": 1, "quantity": 1 },
+  { "id": 3, "name": "Sushi", "price": 6, "promotion_id": 1, "quantity": 1 }
 ]
 ```
 ### 🚨 Observation
